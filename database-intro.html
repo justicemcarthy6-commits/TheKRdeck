@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Architecture Intro - TheKRdeck</title>
+    <!-- Note the ../ pointing to the main folder CSS -->
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+    <!-- Top Navigation Bar for Subfolders -->
+    <nav class="top-navbar">
+        <a href="../index.html" class="nav-logo">
+            <!-- Note the ../ pointing to the assets folder -->
+            <img src="../assets/logo.png" alt="TheKRdeck Logo" class="logo-img">
+        </a>
+        
+        <div class="menu-toggle" id="mobile-menu">☰</div>
+        
+        <div class="nav-links" id="nav-links">
+            <a href="../teachers-hub.html">Teachers</a>
+            <a href="../learners-hub.html">Learners</a>
+            <a href="../articles.html">Articles</a>
+            <a href="../videos.html">Videos</a>
+        </div>
+    </nav>
+
+    <header class="hero-banner fade-in" style="padding: 40px 20px;">
+        <h1>Database Architecture <span class="gold-highlight">Intro</span></h1>
+        <a href="../jhs-hub.html" class="btn-outline" style="margin-top: 20px; display: inline-block;">Back to JHS Hub</a>
+    </header>
+
+    <section class="section-container fade-in" style="max-width: 800px;">
+        <h2>Understanding the Basics</h2>
+        <br>
+        <p>In this lesson, we cover the fundamental structure of databases, including tables, records, and fields. Review the presentation below.</p>
+        <br>
+        
+        <!-- Replace this section with your YouTube embed code -->
+        <div style="background-color: #eaeaea; padding: 50px; text-align: center; border-radius: 12px;">
+            <p><em>[Your YouTube Video Here]</em></p>
+        </div>
+        
+        <br>
+        <h3>Key Takeaways</h3>
+        <ul style="margin-left: 20px; line-height: 1.6; margin-top: 15px;">
+            <li>Data is organized into rows and columns.</li>
+            <li>A primary key uniquely identifies each record.</li>
+            <li>Forms provide a user-friendly way to enter data.</li>
+        </ul>
+    </section>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        mobileMenu.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
