@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - TheKRdeck</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="hero-banner" style="padding: 40px 20px;">
+        <h1>Search <span class="gold-highlight">Results</span></h1>
+        
+        <form class="search-container" action="search.html" method="GET" style="margin-top: 20px;">
+            <input type="text" name="search" id="searchInput" placeholder="Search for Computing and Social Studies topics...">
+            <button type="submit" class="btn-gold">Search</button>
+        </form>
+        <br>
+        <a href="index.html" class="btn-outline">Back to Home</a>
+    </header>
+
+    <section class="section-container">
+        <h2 style="text-align: center; margin-bottom: 40px;" id="searchHeading">Results</h2>
+        <div class="grid-3-col" id="resultsContainer"></div>
+    </section>
+
+    <script>
+        const lessons = [
+            {
+                title: "Computer Hardware",
+                department: "JHS Computing",
+                url: "lessons/hardware-video.html",
+                keywords: "system unit, peripherals, input, output, keyboard, mouse, jhs 1, jhs 2"
+            },
+            {
+                title: "Database Architecture Intro",
+                department: "JHS Computing",
+                url: "lessons/database-intro.html",
+                keywords: "tables, records, fields, software, primary key, access, jhs 3"
+            },
+            {
+                title: "Computing Term 1 Syllabus",
+                department: "Teachers Hub",
+                url: "teachers/computing-lesson-plan.html",
+                keywords: "scheme of work, lesson plan, curriculum, planning, teacher"
+            },
+            {
+                title: "Governance in Ghana",
+                department: "JHS Social Studies",
+                url: "lessons/governance.html",
+                keywords: "civic rights, voting, branches of government, executive, legislature, judiciary"
+            },
+            {
+                title: "Environmental Degradation",
+                department: "JHS Social Studies",
+                url: "teachers/environment-slides.html",
+                keywords: "pollution, deforestation, climate, teacher slides, presentation"
+            },
+            {
+                title: "Basic Science: Plants",
+                department: "Primary Level",
+                url: "lessons/plant-science.html",
+                keywords: "roots, stems, leaves, photosynthesis, environment, lower basic"
+            }
+        ];
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('search');
+        
+        const resultsContainer = document.getElementById('resultsContainer');
+        const searchHeading = document.getElementById('searchHeading');
+        const searchInput = document.getElementById('searchInput');
+
+        if (searchQuery) {
+            searchInput.value = searchQuery;
+            const lowerCaseQuery = searchQuery.toLowerCase();
+            
+            const filteredLessons = lessons.filter(lesson => 
+                lesson.title.toLowerCase().includes(lowerCaseQuery) || 
+                lesson.keywords.toLowerCase().includes(lowerCaseQuery) ||
+                lesson.department.toLowerCase().includes(lowerCaseQuery)
+            );
+
+            searchHeading.innerHTML = `Results for <span class="gold-highlight">"${searchQuery}"</span>`;
+
+            if (filteredLessons.length > 0) {
+                let htmlOutput = "";
+                
+                filteredLessons.forEach(lesson => {
+                    htmlOutput += `
+                        <div class="resource-card">
+                            <h4>${lesson.title}</h4>
+                            <p style="color: #666; margin-bottom: 20px; flex-grow: 1;">${lesson.department}</p>
+                            <a href="${lesson.url}" class="btn-gold" style="display:inline-block; border-radius:6px; text-decoration:none; text-align:center;">View Resource</a>
+                        </div>
+                    `;
+                });
+                
+                resultsContainer.innerHTML = htmlOutput;
+            } else {
+                resultsContainer.innerHTML = `<p style="text-align: center; grid-column: 1 / -1; font-size: 1.2rem;">No resources found matching your search. Please try different keywords.</p>`;
+            }
+        } else {
+            searchHeading.innerHTML = "Enter a keyword to start searching";
+            resultsContainer.innerHTML = "";
+        }
+    </script>
+</body>
+</html>
